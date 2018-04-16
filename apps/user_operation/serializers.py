@@ -11,13 +11,13 @@ class UserFavDetailSerializer(serializers.ModelSerializer):
 
 class UserFavSerializer(serializers.ModelSerializer):
 
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())#将user字段隐藏，并且将默认值设置为当前用户
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())   #将user字段隐藏，并且将默认值设置为当前用户
     class Meta:
         model = UserFav
         fields = ('user','goods','id')
-        # depth = 3#加了就不能post
-        #验证器记住用[]括起来
-        validators = [UniqueTogetherValidator(
+        # depth = 3                                                            #加了就不能post
+
+        validators = [UniqueTogetherValidator(                                 #验证器记住用[]括起来
             queryset=UserFav.objects.all(),
             fields=('user','goods'),
             message='已经收藏过了',

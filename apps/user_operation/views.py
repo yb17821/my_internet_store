@@ -33,16 +33,14 @@ class UserFavViewset(mixins.DestroyModelMixin,
     # 设置本页面需要的验证类，没有则使用settings里的默认配置
     authentication_classes = (JSONWebTokenAuthentication, SessionAuthentication,)
 
-    # IsAuthenticated,验证是否登录
-    # IsOwnerOrReadOnly,自定义的验证类，验证当前用户和收藏的用户是不是同一个
-    permission_classes = (IsAuthenticated,
-                          IsOwnerOrReadOnly,#外键关系采用
+    permission_classes = (IsAuthenticated,  # IsAuthenticated,验证是否登录
+                          # IsOwnerOrReadOnly,自定义的验证类，验证当前用户和收藏的用户是不是同一个
+                          IsOwnerOrReadOnly,  # 外键关系采用
                           )
 
-    # 设置详情也的搜索条件，默认是数据表的id，look_up可以指定表里的某个字段为搜索条件
-    # 为了方便的使用显示是否收藏和取消收藏功能，所以把搜索条件改为goods_id,
-    # 否则就要根据goods_id查询收藏id，再做查询和删除操作
-    lookup_field = 'goods_id'
+    lookup_field = 'goods_id'  # 设置详情也的搜索条件，默认是数据表的id，look_up可以指定表里的某个字段为搜索条件
+                                # 为了方便的使用显示是否收藏和取消收藏功能，所以把搜索条件改为goods_id,
+                                # 否则就要根据goods_id查询收藏id，再做查询和删除操作
 
     def get_queryset(self):
         return UserFav.objects.filter(user=self.request.user)
@@ -70,12 +68,12 @@ class LeavingMessageViewset(mixins.ListModelMixin,
 
 
 class UserAddressViewset(
-                            mixins.ListModelMixin,
-                            mixins.CreateModelMixin,
-                            mixins.RetrieveModelMixin,
-                            mixins.DestroyModelMixin,
-                            mixins.UpdateModelMixin,
-                            viewsets.GenericViewSet
+    mixins.ListModelMixin,
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.DestroyModelMixin,
+    mixins.UpdateModelMixin,
+    viewsets.GenericViewSet
 ):
     '''
     list:所有收货地址
@@ -93,4 +91,3 @@ class UserAddressViewset(
         return UserAddress.objects.filter(user=self.request.user)
     # def get_object(self):
     #     return UserAddress.objects.get(id=10)
-

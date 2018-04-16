@@ -18,7 +18,7 @@ class UserFav(models.Model):
     class Meta:
         verbose_name = u"用户收藏"
         verbose_name_plural = verbose_name
-        unique_together = ('user', 'goods')  # 相互绑定，当有相同的一对存储时，数据库报错
+        unique_together = ('user', 'goods')       # 相互绑定，当有相同的一对存储时，数据库报错
 
     def __str__(self):
         return str(self.user.name)
@@ -55,7 +55,7 @@ class UserAddress(models.Model):
     """
         用户收货地址
         """
-    user = models.ForeignKey(User, verbose_name="用户",on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, verbose_name="用户", on_delete=models.DO_NOTHING)
     province = models.CharField(max_length=100, default="", verbose_name="省份")
     city = models.CharField(max_length=100, default="", verbose_name="城市")
     district = models.CharField(max_length=100, default="", verbose_name="区域")

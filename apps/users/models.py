@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from datetime import datetime
 
+
 # Create your models here.
 class UserProfile(AbstractUser):
     """
@@ -9,8 +10,10 @@ class UserProfile(AbstractUser):
     """
     name = models.CharField(max_length=30, null=True, blank=True, verbose_name="姓名")
     birthday = models.DateField(null=True, blank=True, verbose_name="出生年月")
-    gender = models.CharField(max_length=6, choices=(("male", u"男"), ("female", "女")), default="female", verbose_name="性别")
+    gender = models.CharField(max_length=6, choices=(("male", u"男"), ("female", "女")), default="female",
+                              verbose_name="性别")
     mobile = models.CharField(null=True, blank=True, max_length=11, verbose_name="电话")
+
     # email = models.EmailField(max_length=100, null=True, blank=True, verbose_name="邮箱")
 
     class Meta:
@@ -18,7 +21,7 @@ class UserProfile(AbstractUser):
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return self.username#使用父类的username，这样写是为了防止报错，因为自己设置的name是允许为空的
+        return self.username  # 使用父类的username，这样写是为了防止报错，因为自己设置的name是允许为空的
 
 
 class VerifyCode(models.Model):

@@ -1,6 +1,8 @@
 from django.db.models import Q
 from rest_framework import serializers
-from .models import Goods,GoodsCategory,IndexAd,GoodsImage,Banner,GoodsCategoryBrand
+from .models import Goods, GoodsCategory, IndexAd, GoodsImage, Banner, GoodsCategoryBrand
+
+
 # class GoodsSerializer(serializers.Serializer):
 #
 #     name = serializers.CharField(max_length=100, required=True)
@@ -16,41 +18,45 @@ class CategorySerializer3(serializers.ModelSerializer):
     class Meta:
         model = GoodsCategory
         fields = '__all__'
+
+
 class CategorySerializer2(serializers.ModelSerializer):
     sub_cat = CategorySerializer3(many=True)
+
     class Meta:
         model = GoodsCategory
         fields = '__all__'
+
+
 class CategorySerializer(serializers.ModelSerializer):
-    sub_cat = CategorySerializer2(many=True)
-    #sub_cat是model里的related_name,用来给父类调用
+    sub_cat = CategorySerializer2(many=True)  # sub_cat是model里的related_name,用来给父类调用
+
     class Meta:
         model = GoodsCategory
         fields = '__all__'
-        # depth = 1，对反向引用没用
+        # depth = 1，                                       #对反向引用没用
+
 
 class GoodsImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = GoodsImage
         fields = '__all__'
 
+
 class GoodsSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
     images = GoodsImageSerializer(many=True)
+
     class Meta:
         model = Goods
         # fields = ('name', 'click_num', 'market_price', 'add_time')
         fields = '__all__'
 
+
 class BannerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Banner
         fields = '__all__'
-
-
-
-
-
 
 
 class BrandSerializer(serializers.ModelSerializer):
@@ -73,10 +79,8 @@ class IndexCategorySerializer(serializers.ModelSerializer):
             goods_json = GoodsSerializer(good_ins, many=False, context={'request': self.context['request']}).data
         return goods_json
 
-
-
     def get_goods(self, obj):
-        all_goods = Goods.objects.filter(Q(category_id=obj.id)|Q(category__parent_category_id=obj.id)|Q\
+        all_goods = Goods.objects.filter(Q(category_id=obj.id) | Q(category__parent_category_id=obj.id) | Q \
             (category__parent_category__parent_category_id=obj.id))
         goods_serializer = GoodsSerializer(all_goods, many=True, context={'request': self.context['request']})
         return goods_serializer.data

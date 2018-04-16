@@ -7,7 +7,7 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework_extensions.cache.mixins import CacheResponseMixin
 from .filters import GoodsFilter
 from .models import Goods, GoodsCategory, Banner
-from .serializers import GoodsSerializer, CategorySerializer, BannerSerializer,IndexCategorySerializer
+from .serializers import GoodsSerializer, CategorySerializer, BannerSerializer, IndexCategorySerializer
 
 
 # Create your views here.
@@ -59,7 +59,7 @@ from .serializers import GoodsSerializer, CategorySerializer, BannerSerializer,I
 
 
 # noinspection PyUnresolvedReferences
-class GoodsListViewSet(CacheResponseMixin,mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class GoodsListViewSet(CacheResponseMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     queryset = Goods.objects.all()
     serializer_class = GoodsSerializer
     # 第一种区间过滤，使用类，可以在调api时使用
@@ -70,14 +70,14 @@ class GoodsListViewSet(CacheResponseMixin,mixins.ListModelMixin, mixins.Retrieve
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
-
         instance.click_num += 1
         instance.save()
         serializer = self.get_serializer(instance)
-
         return Response(serializer.data)
 
     # authentication_classes = (TokenAuthentication,)
+
+
     # 第二种，使用函数，只能在url使用
     # filter_backends = (SearchFilter, OrderingFilter)
     # search_fields = ('name','shop_price')
@@ -94,7 +94,7 @@ class GoodsListViewSet(CacheResponseMixin,mixins.ListModelMixin, mixins.Retrieve
     #     return queryset
 
 
-class CategoryViewset(CacheResponseMixin,mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class CategoryViewset(CacheResponseMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     '''
     list:商品分类列表
     retrieve:商品分类详情
@@ -108,7 +108,7 @@ class CategoryViewset(CacheResponseMixin,mixins.ListModelMixin, mixins.RetrieveM
 #     serializer_class = BannerSerializer
 
 
-class BannerViewset(CacheResponseMixin,mixins.ListModelMixin, viewsets.GenericViewSet):
+class BannerViewset(CacheResponseMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     """
     获取轮播图列表
     """
@@ -116,7 +116,7 @@ class BannerViewset(CacheResponseMixin,mixins.ListModelMixin, viewsets.GenericVi
     serializer_class = BannerSerializer
 
 
-class IndexCategoryViewset(CacheResponseMixin,mixins.ListModelMixin, viewsets.GenericViewSet):
+class IndexCategoryViewset(CacheResponseMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     """
     首页商品分类数据
     """

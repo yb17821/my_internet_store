@@ -2,9 +2,9 @@ from django.db import models
 # from users.models import UserProfile
 from goods.models import Goods
 from django.contrib.auth import get_user_model
-#获取当前用户模型，其实就是获取settings.AUTH_USER_MODEL。
+
 #from django.conf import settings
-User = get_user_model()
+User = get_user_model()                                      #获取当前用户模型，其实就是获取settings.AUTH_USER_MODEL。
 
 
 # Create your models here.
