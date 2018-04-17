@@ -21,7 +21,7 @@ sys.path.insert(0, BASE_DIR)
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 #告诉项目xadmin的导入路径
 sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
-sys.path.insert(0, os.path.join(BASE_DIR, 'Mxshop'))
+# sys.path.insert(0, os.path.join(BASE_DIR, 'Mxshop'))
 # print(sys.path)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -46,14 +46,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'DjangoUeditor',
-    'users.apps.UsersConfig',
-    'goods.apps.GoodsConfig',
-    'trade.apps.TradeConfig',
-    'user_operation.apps.UserOperationConfig',
+    'extra_apps.DjangoUeditor',
+    'apps.users.apps.UsersConfig',
+    'apps.goods.apps.GoodsConfig',
+    'apps.trade.apps.TradeConfig',
+    'apps.user_operation.apps.UserOperationConfig',
 
     'crispy_forms',
-    'xadmin',
+    'extra_apps.xadmin',
 
     'rest_framework',
     'django_filters',
