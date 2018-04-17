@@ -21,7 +21,7 @@ sys.path.insert(0, BASE_DIR)
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 #告诉项目xadmin的导入路径
 sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
-# sys.path.insert(0, os.path.join(BASE_DIR, 'Mxshop'))
+sys.path.insert(0, os.path.join(BASE_DIR, 'Mxshop'))
 # print(sys.path)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
