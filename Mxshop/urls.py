@@ -45,10 +45,12 @@ urlpatterns = [
     #drf自带的token认证模式
     path('api-token-auth/',ObtainAuthToken),
     #jwt的认证借口
-    path('login/', obtain_jwt_token),
+    path('login/$', obtain_jwt_token),
     # path('goods/',GoodsListViewSet.as_view(),name='goods_list'),
     path('docs/',include_docs_urls(title='标题在url设置')),
     path('api-auth/', include('rest_framework.urls')),
+    path('',include('social_django.urls',namespace='social'))
+
 
 ]
 

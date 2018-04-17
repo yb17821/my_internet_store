@@ -61,8 +61,6 @@ class UserViewset(mixins.CreateModelMixin,
         elif self.action =='create':
             return UserRegSerializer
         return UserDetailSerizlizer
-
-
     authentication_classes = (JSONWebTokenAuthentication, SessionAuthentication,)
 
     #动态设置permission
@@ -93,13 +91,13 @@ class UserViewset(mixins.CreateModelMixin,
         return serializer.save()
     #这个页面所有人可访问，但是又不能让所有人看到内容，所以，删除List功能
 
-
-
-
     def get_queryset(self):
         return User.objects.filter(id=self.request.user.id)
     def get_object(self):
         return self.request.user
+
+
+
 
 
 

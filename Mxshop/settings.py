@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'rest_framework.authtoken',
+    'social_django',
 ]
 
 
@@ -82,7 +83,7 @@ ROOT_URLCONF = 'Mxshop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -90,6 +91,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
+
             ],
         },
     },
@@ -168,6 +172,10 @@ REGEX_MOBILE = '^1[358]\d{9}$|^147\d{8}$|^176\d{8}$'
 
 AUTHENTICATION_BACKENDS = (
     'users.views.CustomBackend',
+    'social_core.backends.weibo.WeiboOAuth2',
+    'social_core.backends.qq.QQOAuth2',
+    'social_core.backends.weixin.WeixinOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
 )
 MEDIA_URL = '/media/'   #指定浏览url
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'Mxshop/media')#指定文件根目录
@@ -181,6 +189,13 @@ REST_FRAMEWORK_EXTENSIONS = {
     #DRF的缓存时间设置
     'DEFAULT_CACHE_RESPONSE_TIMEOUT': 60 * 15
 }
+
+SOCIAL_AUTH_WEIBO_KEY = '1545314450'
+SOCIAL_AUTH_WEIBO_SECRET = '54fafc6566531329338d403c26e0b927'
+# SOCIAL_AUTH_WEIBO_REDIRECT_STATE = True
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'
 
 
 
