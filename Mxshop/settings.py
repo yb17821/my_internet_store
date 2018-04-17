@@ -54,7 +54,6 @@ INSTALLED_APPS = [
 
     'crispy_forms',
     'extra_apps.xadmin',
-
     'rest_framework',
     'django_filters',
     'corsheaders',
