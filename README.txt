@@ -1,1 +1,0 @@
-请先在虚拟环境安装requirements中的库
