@@ -59,7 +59,7 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'rest_framework.authtoken',
-    'social_django',
+    # 'social_django',
 ]
 
 
@@ -91,8 +91,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect',
+                # 'social_django.context_processors.backends',
+                # 'social_django.context_processors.login_redirect',
 
             ],
         },
@@ -155,12 +155,14 @@ REST_FRAMEWORK = {
     #配置全局过滤器后端
     # 'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
     #配置全局分页器
-    'DEFAULT_PAGINATION_CLASS':'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE':5,
+    # 'DEFAULT_PAGINATION_CLASS':'rest_framework.pagination.LimitOffsetPagination',
+    # 'PAGE_SIZE':5,
     "DEFAULT_AUTHENTICATION_CLASSES":(
       "rest_framework.authentication.BasicAuthentication",
       "rest_framework.authentication.SessionAuthentication",
-        # "rest_framework.authentication.TokenAuthentication",#此处为全局配置token验证，
+    # "rest_framework.authentication.TokenAuthentication",#此处为全局配置token验证，
+    # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        #
         #建议不要设置全局，可单独在需要token验证的view里添加：
         # from rest_framework.authentication import TokenAuthentication
         # authentication_classes = (TokenAuthentication,)
@@ -172,10 +174,10 @@ REGEX_MOBILE = '^1[358]\d{9}$|^147\d{8}$|^176\d{8}$'
 
 AUTHENTICATION_BACKENDS = (
     'users.views.CustomBackend',
-    'social_core.backends.weibo.WeiboOAuth2',
-    'social_core.backends.qq.QQOAuth2',
-    'social_core.backends.weixin.WeixinOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
+    # 'social_core.backends.weibo.WeiboOAuth2',
+    # 'social_core.backends.qq.QQOAuth2',
+    # 'social_core.backends.weixin.WeixinOAuth2',
+    # 'django.contrib.auth.backends.ModelBackend',
 )
 MEDIA_URL = '/media/'   #指定浏览url
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'Mxshop/media')#指定文件根目录
@@ -190,16 +192,19 @@ REST_FRAMEWORK_EXTENSIONS = {
     'DEFAULT_CACHE_RESPONSE_TIMEOUT': 60 * 15
 }
 
-SOCIAL_AUTH_WEIBO_KEY = '1545314450'
-SOCIAL_AUTH_WEIBO_SECRET = '54fafc6566531329338d403c26e0b927'
-# SOCIAL_AUTH_WEIBO_REDIRECT_STATE = True
+# SOCIAL_AUTH_WEIBO_KEY = '1545314450'
+# SOCIAL_AUTH_WEIBO_SECRET = '54fafc6566531329338d403c26e0b927'
+# # SOCIAL_AUTH_WEIBO_REDIRECT_STATE = True
+#
+# SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+# LOGIN_REDIRECT_URL = '/'
 
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
-LOGIN_REDIRECT_URL = '/'
-
-
-
-
+WEIBO_KEY = '1545314450'
+WEIBO_SECRET = '54fafc6566531329338d403c26e0b927'
+WEIBO_GET_CODE_URL = 'https://api.weibo.com/oauth2/authorize?client_id=%s&response_type=code&redirect_uri=%s'
+WEIBO_GET_TOKEN_URL = 'https://api.weibo.com/oauth2/access_token'
+WEIBO_GET_USER_INFO_URL = 'https://api.weibo.com/2/users/show.json?access_token=%s&uid=%s'
+WEIBO_REDIRECT_URL = 'http://127.0.0.1:8000/completeweibo/'
 
 
 

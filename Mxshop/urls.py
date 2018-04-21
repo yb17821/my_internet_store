@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 import xadmin
-from users.views import UserViewset,SmsCodeViewset,UserChangePwdViewSet
+from users.views import UserViewset,SmsCodeViewset,UserChangePwdViewSet,completeweibo,loginweibo,CompleteweiboViewset
 from goods.views import GoodsListViewSet,CategoryViewset,BannerViewset,IndexCategoryViewset
 from user_operation.views import UserFavViewset,LeavingMessageViewset,UserAddressViewset
 from trade.views import ShoppinglistCartViewset,OrderInfoViewSet
@@ -36,7 +36,7 @@ router.register(r'userpwd', UserChangePwdViewSet, base_name="userpwd")
 router.register(r'shopcarts', ShoppinglistCartViewset, base_name="shopcarts")
 router.register(r'orders', OrderInfoViewSet, base_name="orders")
 router.register(r'banners', BannerViewset, base_name="banners")
-router.register(r'indexgoods', IndexCategoryViewset, base_name="indexgoods")
+# router.register(r'completeweibo', CompleteweiboViewset, base_name="completeweibo")
 urlpatterns = [
     # path('goods/',include('goods.urls')),
     path(r"",include(router.urls)),
@@ -44,12 +44,16 @@ urlpatterns = [
     path('xadmin/', xadmin.site.urls),
     #drf自带的token认证模式
     path('api-token-auth/',ObtainAuthToken),
-    #jwt的认证借口
-    path('login/$', obtain_jwt_token),
+    #jwt的认证接口
+    path('login/', obtain_jwt_token),
+    path('loginweibo/', loginweibo),
+    path('completeweibo/', completeweibo),
+    # path('completeweibo/', Completeweibo.as_view()),
+
     # path('goods/',GoodsListViewSet.as_view(),name='goods_list'),
     path('docs/',include_docs_urls(title='标题在url设置')),
-    path('api-auth/', include('rest_framework.urls')),
-    path('',include('social_django.urls',namespace='social'))
+    # path('',include('social_django.urls',namespace='social'))
+    path('api-auth',include('rest_framework.urls',namespace='rest_framework'))
 
 
 ]

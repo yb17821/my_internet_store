@@ -38,3 +38,15 @@ class VerifyCode(models.Model):
 
     def __str__(self):
         return self.code
+
+class WeiboAndUser(models.Model):
+    '''
+    用户和微博用户关联
+    '''
+    weibo_id = models.CharField(max_length=100)
+    user_id = models.IntegerField(max_length=100)
+
+    class Meta:
+        verbose_name = "用户和微博用户关联"
+        verbose_name_plural = verbose_name
+
