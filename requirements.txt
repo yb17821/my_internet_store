@@ -33,7 +33,7 @@ openpyxl==2.5.0
 Pillow==5.0.0
 PyAutoGUI==0.9.36
 pycurl==7.43.0.1
-Pygments==2.2.0
+Pygments==2.7.4
 PyJWT==1.6.0
 PyMsgBox==1.0.6
 PyScreeze==0.1.14
